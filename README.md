@@ -2,8 +2,8 @@
 
 <h3>Equipe</h3>
 
-Diego Barros
-Marcel Henrique
-Pedro Thomas
-Rafael Pardini
+Diego Barros</br>
+Marcel Henrique</br>
+Pedro Thomas</br>
+Rafael Pardini</br></br>
 
