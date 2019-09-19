@@ -17,6 +17,10 @@ O objetivo do grupo é construir um chat para membros do DCC. A aplicação ter�
 <li>Dados dos usuários - banco SQL</li>
 <li>Dados dos chats - a decidir</li>
 </ul>
+
 <h3>Estórias:</h3>
 
 <h3>Tarefas:</h3>
+
+<h3>Planilha de horas trabalhadas:</h3>
+https://docs.google.com/spreadsheets/d/1LkTBOFhggMkR51647JvbGOqAns9imvd4gFM-OkqZy5I/edit?usp=sharing</br>
