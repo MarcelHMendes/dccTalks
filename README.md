@@ -19,8 +19,24 @@ O objetivo do grupo é construir um chat para membros do DCC. A aplicação ter�
 </ul>
 
 <h3>Estórias:</h3>
+<ul>
+<li>Fazer interface web - 3 story points</li>
+<li>Fazer backend do servidor - 5 story points</li>
+<li>Fazer backend do cliente - 5 story points</li>
+<li>Autenticar com o servidor do DCC (ldap.dcc.ufmg.br) - 3 story points</li>
+<li>Adicionar Funcionalidades para os usuários</li>
+</ul>
 
 <h3>Tarefas:</h3>
+<ul>
+<li>Autenticar com o servidor do DCC (ldap.dcc.ufmg.br) - Rafael Pardini</li>
+<ul>
+<li>Escolher dentre os módulos de autenticação disponíveis, qual será utilizado</li>
+<li>Estudar a documentação do módulo</li>
+<li>Escrever um código muito simples que utilize a autenticação para testes</li>
+<li>Ajustar o código e colocar em produção</li>
+</ul>
+</ul>
 
 <h3>Planilha de horas trabalhadas:</h3>
 https://docs.google.com/spreadsheets/d/1LkTBOFhggMkR51647JvbGOqAns9imvd4gFM-OkqZy5I/edit?usp=sharing</br>
