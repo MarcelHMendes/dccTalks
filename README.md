@@ -35,6 +35,7 @@ O objetivo do grupo é construir um chat para membros do DCC. A aplicação ter�
 <li>Estudar a documentação do módulo</li>
 <li>Escrever um código muito simples que utilize a autenticação para testes</li>
 <li>Ajustar o código e colocar em produção</li>
+</ul>
 <li>Backend do Servior - Marcel Mendes</li>
 <ul>
 <li>Criar servidor http e definir os caminhos que serão acessados pelo cliente.</li>
