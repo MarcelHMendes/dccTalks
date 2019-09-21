@@ -46,7 +46,7 @@ O objetivo do grupo é construir um chat para membros do DCC. A aplicação ter�
 <li>Adicionar suporte para nicknames</li>
 <li>Integrar/sincronizar servidor a outros módulos da aplicação </li>
 </ul></br>
-<li>Fazer backend do cliente - Pedro Thomas</li>
+<li>Fazer backend do cliente - Pedro Thomas & Diego Barros</li>
 <ul>
 <li>Criar interface para o módulo de autenticação.</li>
 <li>Armazenar sessão.</li>
