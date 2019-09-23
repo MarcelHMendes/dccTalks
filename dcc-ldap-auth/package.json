@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "assert": "^2.0.0",
-    "ldapjs": "^1.0.2"
+    "ldapjs-client": "^0.1.1"
   }
 }
