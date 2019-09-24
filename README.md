@@ -41,6 +41,8 @@ O objetivo do grupo é construir um chat para membros do DCC. A aplicação ter�
 <li>Criar servidor http e definir os caminhos que serão acessados pelo cliente.</li>
 <li>Criar módulo de recebimento de mensagens</li>
 <li>Criar módulo de repasse de mensagem (via broadcast)</li>
+<li>Criar módulo de recebimentode mensagem(privada)</li>
+<li>Criar módulo de repasse de mensagem (privada)</li>
 <li>Atualizar lista de usuários</li>
 <li>Armazenar mensagens</li>
 <li>Adicionar suporte para nicknames</li>
