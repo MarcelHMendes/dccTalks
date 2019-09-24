@@ -5,7 +5,7 @@
 	<title>Chat dccTalks</title>	
 	<link rel="stylesheet" type="text/css" href="/main.css">
 	<script src="/socket.io/socket.io.js"></script>
-
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 
 </head>	
 <body>
@@ -14,17 +14,32 @@
 	<h3>Arquivo de teste</h3>
 		
 	<div id="messages"></div>		
+	<form id="chat">
+         <input type='text' id='texto_mensagem' name='texto_mensagem' />
+         <input type='submit' value='Enviar mensagem!' />    
+     </form>
+
+
 	<script>
-		var socket = io();
+		$(document).ready(function(){
+  			var socket = io();
 
-		socket.on('chat message', function(msg){
-      	$('#messages').append($('<p>').text(msg));
-    });
+			  $('form#chat').submit(function(e){
+	              e.preventDefault();
+	              socket.emit("chat_message_send", $(this).find("#texto_mensagem").val(), function(){
+	                   $("form#chat #texto_mensagem").val("");
+	              });
+	         });		
 
+			socket.on('chat_message_update', function(msg){
+	    	  	$('#messages').append($('<p>').text(msg));
+		    });
+
+	});
 	</script>
 
 
-<script type="text/javascript" src="jquery-3.3.1.min.js"></script>			
+			
 </body>
 </html>
 
