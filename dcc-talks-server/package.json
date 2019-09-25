@@ -1,0 +1,24 @@
+{
+  "name": "dcctalks-server",
+  "version": "1.0.0",
+  "description": "Server application",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcelHMendes/dccTalks.git"
+  },
+  "dependencies": {
+    "socket.io": "^2.3.0",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarcelHMendes/dccTalks/issues"
+  },
+  "homepage": "https://github.com/MarcelHMendes/dccTalks#readme"
+}
