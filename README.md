@@ -33,7 +33,8 @@ O objetivo do grupo é construir um chat para membros do DCC. A aplicação ter�
 <ul>
 <li>Escolher dentre os módulos de autenticação disponíveis, qual será utilizado</li>
 <li>Estudar a documentação do módulo</li>
-<li>Escrever um código muito simples que utilize a autenticação para testes</li>
+<li>Escrever um código que cria o cliente LDAP corretamente</li>
+<li>Escrever um código muito simples que autentica um usuário através de um "bind"</li>
 <li>Ajustar o código e colocar em produção</li>
 </ul></br>
 <li>Backend do Servidor - Marcel Mendes</li>
