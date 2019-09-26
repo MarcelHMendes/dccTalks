@@ -5,6 +5,6 @@ import App from './App';
 import Login from './components/Login';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 serviceWorker.register();
