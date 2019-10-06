@@ -5,6 +5,10 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
+/*arrays*/
+var ultimas_mensagens = []; //Armazena io histórico das mensagens trocadas
+var usuarios = []; //Armazena os apelidos de usuários
+
 /*events*/
 
 app.get('/', function(req, res){
@@ -22,13 +26,26 @@ io.on('connection', function(socket){
 });
 
 io.on("connection", function(socket){
-    socket.on("chat_message_send", function(message_sent, callback){
+
+
+	socket.on("entrar", function(callback){
+		for(indice in ultimas_mensagens){		//Envia histórico de msg para usuário que acabou de entrar no chat
+			socket.emit("chat_message_update", ultimas_mensagens[indice]);
+		}
+
+	});
+
+	socket.on("chat_message_send", function(message_sent, callback){
 		message_sent = "[ " + pegarDataAtual() + " ]: " + message_sent;     
 
-         io.sockets.emit("chat_message_update", message_sent);
-         callback();
+        io.sockets.emit("chat_message_update", message_sent);
+        var obj_mensagem = {msg: message_sent, tipo: ''};
+        
+        armazenaMensagem(obj_mensagem);
+        callback();
      });
 });
+
 
 /*functions*/
 
@@ -43,4 +60,8 @@ function pegarDataAtual(){
   
   var dataFormatada = dia + "/" + mes + "/" + ano + " " + hora + ":" + minuto + ":" + segundo;
   return dataFormatada;
+}
+
+function armazenaMensagem(mensagem){
+	ultimas_mensagens.push(mensagem);
 }
