@@ -30,7 +30,7 @@ io.on("connection", function(socket){
 
 	socket.on("entrar", function(callback){
 		for(indice in ultimas_mensagens){		//Envia histórico de msg para usuário que acabou de entrar no chat
-			socket.emit("chat_message_update", ultimas_mensagens[indice]);
+			socket.emit("chat_message_history", ultimas_mensagens[indice]);
 		}
 
 	});
@@ -38,7 +38,7 @@ io.on("connection", function(socket){
 	socket.on("chat_message_send", function(message_sent, callback){
 		message_sent = "[ " + pegarDataAtual() + " ]: " + message_sent;     
 
-        io.sockets.emit("chat_message_update", message_sent);
+        io.sockets.emit("chat_message_update", message_sent); //Envia mensagens em tempo real
         var obj_mensagem = {msg: message_sent, tipo: ''};
         
         armazenaMensagem(obj_mensagem);

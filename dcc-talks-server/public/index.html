@@ -14,7 +14,8 @@
 	<h3>Arquivo de teste do servidor</h3>
 		
 	<div id="sala_chat">
-	<div id="messages"></div>		
+	<div id="messages">
+	</div>		
 	<form id="chat">
         <input type='text' id='texto_mensagem' name='texto_mensagem' />
         <input type='submit' value='Enviar mensagem!' />    
@@ -36,9 +37,14 @@
 	            });
 	        });		
 
-			socket.on('chat_message_update', function(msg){
-	    	  	$('#messages').append($('<p>').text(msg.msg));
+ 			socket.on('chat_message_update', function(msg){ //recebe msg tempo real
+	    	  	$('#messages').append($('<p>').text(msg));
 		    });
+		    	
+ 			socket.on('chat_message_history', function(msg){ //recebe historico msgs
+ 				$('#messages').append($('<p>').text(msg.msg));
+ 			});	
+			
 
 	});
 	</script>
