@@ -12,6 +12,13 @@
 	<h2>Página HTML</h2> 
 			
 	<h3>Arquivo de teste do servidor</h3>
+
+	<div id='acesso_usuario'>
+		<form id='login'>
+			<input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido' />
+			<input type='submit' value='Entrar' />
+		</form>
+	</div>
 		
 	<div id="sala_chat">
 	<div id="messages">
@@ -26,10 +33,19 @@
 		$(document).ready(function(){
   			var socket = io();
   				
-  				socket.emit("entrar",function(){
-  					//apelido e autenticação(ainda não tenho certeza como será feita)
-  				});
+  			$("form#login").submit(function(e){
+				e.preventDefault();
+				
+			
+				// Evento enviado quando o usuário insere um apelido
+			socket.emit("entrar", $(this).find("#apelido").val(), function(valido){
+				if(valido == true){
+					$("#acesso_usuario").hide();
+					$("#sala_chat").show();
+				}
+			});
 
+			});
  				$('form#chat').submit(function(e){
 	            e.preventDefault();
 	            socket.emit("chat_message_send", $(this).find("#texto_mensagem").val(), function(){
@@ -38,11 +54,11 @@
 	        });		
 
  			socket.on('chat_message_update', function(msg){ //recebe msg tempo real
-	    	  	$('#messages').append($('<p>').text(msg));
+	    	  	$('#messages').append($('<p>').html(msg));
 		    });
 		    	
  			socket.on('chat_message_history', function(msg){ //recebe historico msgs
- 				$('#messages').append($('<p>').text(msg.msg));
+ 				$('#messages').append($('<p>').html(msg.msg));
  			});	
 			
 

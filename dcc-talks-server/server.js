@@ -28,15 +28,31 @@ io.on('connection', function(socket){
 io.on("connection", function(socket){
 
 
-	socket.on("entrar", function(callback){
-		for(indice in ultimas_mensagens){		//Envia histórico de msg para usuário que acabou de entrar no chat
-			socket.emit("chat_message_history", ultimas_mensagens[indice]);
+	socket.on("entrar", function(apelido, callback){
+
+		if(!(apelido in usuarios)){	//suporte para apelidos (não tem relação com autenticação)
+
+			socket.apelido = apelido;
+			socket.color = getRandomColor();
+			usuarios[apelido] = socket;
+
+			var message_sent = "[ " + pegarDataAtual() + " ] " + apelido.fontcolor(socket.color) + " acabou de entrar na sala".fontcolor(socket.color);
+			io.sockets.emit("chat_message_update", message_sent);
+
+
+			for(indice in ultimas_mensagens){		//Envia histórico de msg para usuário que acabou de entrar no chat
+				socket.emit("chat_message_history", ultimas_mensagens[indice]);
+			}
+
+			callback(true);	
+		}else{
+			callback(false);
 		}
 
 	});
 
-	socket.on("chat_message_send", function(message_sent, callback){
-		message_sent = "[ " + pegarDataAtual() + " ]: " + message_sent;     
+	socket.on("chat_message_send", function(message_sent, callback){ 
+		message_sent = "[ " + pegarDataAtual() + " ]: " + socket.apelido.fontcolor(socket.color) + " diz: ".fontcolor(socket.color) + message_sent;     
 
         io.sockets.emit("chat_message_update", message_sent); //Envia mensagens em tempo real
         var obj_mensagem = {msg: message_sent, tipo: ''};
@@ -64,4 +80,13 @@ function pegarDataAtual(){
 
 function armazenaMensagem(mensagem){
 	ultimas_mensagens.push(mensagem);
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
