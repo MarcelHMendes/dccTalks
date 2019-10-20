@@ -1,3 +1,10 @@
+import ComponentModule from "./ComponentModule"
 export function LoadComponent(Component) {
-    this.setState({modules: [...this.state.modules, Component]});
-};
+  let nkey=this.lastKey++;
+  this.setState({
+    modules: [
+      ...this.state.modules,
+      new ComponentModule(Component, nkey, this.unmountComponent.bind(this, nkey))
+    ]
+  });
+}

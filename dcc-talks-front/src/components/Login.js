@@ -1,42 +1,59 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
+  "@global": {
     body: {
-      backgroundColor: theme.palette.common.white,
-    },
+      backgroundColor: theme.palette.common.white
+    }
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    let email=event.target.elements.email.value;
+    let password = event.target.elements.password.value;
+    props.socketEntrar(email, (valido) => {
+      if (valido===true){
+        props.retv(email);
+        props.unmount();
+      }
+      else{
+        alert("Email não válido");
+        //TODO:
+        //limpar o campo de email e senha
+      }
+    })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -48,7 +65,9 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Logar
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate
+        onSubmit = {handleFormSubmit}
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -56,9 +75,11 @@ export default function SignIn() {
             fullWidth
             id="email"
             label="Email"
+            //value={values.email}
             name="email"
             autoComplete="email"
             autoFocus
+            //onChange={handleChange('email')}
           />
           <TextField
             variant="outlined"
@@ -70,6 +91,8 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            //value={values.password}
+            //onChange={handleChange('password')}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -81,11 +104,12 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            //onClick={handleSubmit}//{props.unmount}
           >
             Logar
           </Button>
-         </form>
+        </form>
       </div>
-   </Container>
+    </Container>
   );
 }
