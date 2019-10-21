@@ -24,9 +24,24 @@ form input[type='submit']{
      color:#FFF;
      cursor:pointer;
      font-weight: bold;
-     padding:7px 5px;
+     padding:5px 5px;
      width:19%;
 }
+
+form input[type='file']{
+     display: none;
+}
+
+#sendImage{
+	 background: #45C5BF;
+     border:none;
+     border-radius: 5px;
+     color:#FFF;
+     cursor:pointer;
+     font-weight: bold;
+     padding:5px 5px;
+}
+
 #messages{
      background: #FFF;
      border:2px solid #45C5BF;
@@ -48,4 +63,8 @@ form input[type='submit']{
 
 #sala_chat{
      display: none;
+}
+
+#figure{
+	width: 10%;
 }

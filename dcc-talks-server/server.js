@@ -3,7 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 
 var io = require('socket.io')(http);
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
 
 /*arrays*/
 var ultimas_mensagens = []; //Armazena io histórico das mensagens trocadas
@@ -17,8 +17,11 @@ app.get('/', function(req, res){
 
 .use(express.static('public'));
 
-http.listen(port, function(){
-  console.log('listening on port:'+port);
+app.set('views',__dirname+'/views');
+app.set('view engine','jade');
+
+http.listen(3000, function(){
+  console.log('listening on port:3000');
 });
 
 io.on('connection', function(socket){
@@ -60,6 +63,11 @@ io.on("connection", function(socket){
         armazenaMensagem(obj_mensagem);
         callback();
      });
+
+  socket.on("image", function(data){  //recebe img
+    io.sockets.emit('imageTo', data); //envia msg
+  });
+
 });
 
 
