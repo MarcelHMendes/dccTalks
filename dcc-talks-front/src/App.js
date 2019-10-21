@@ -1,14 +1,11 @@
 import React, { lazy, Suspense } from "react";
 import "./App.css";
-import socketIOClient from "socket.io-client";
 
 import Login from "./components/Login";
-import Side from "./components/Side";
-import Button from "./components/Button";
 import ChatBox from "./components/ChatBox";
 
-import ioClient from "socket.io-client";
 
+import socketHandler from "./utils/socketHandler";
 import ComponentModule from "./utils/ComponentModule";
 
 const LoadingMessage = () => "I'm loading...";
@@ -28,20 +25,20 @@ class App extends React.Component {
       password: ""
     };
     this.lastKey = 1;
-    this.socket = ioClient("localhost:5000");
+    this.socketHandler = new socketHandler("localhost:5000");
     this.state.modules[0].setArgs({
-      socketEntrar: (value, callback) => this.socket.emit("entrar", value, callback),
-      retv: (value) => {
-        this.state.username=value;
-        let idx = this.LoadComponentModule(ChatBox);
-        this.state.modules[idx].setArgs({
-          sendMessage: (message, callback) => this.socket.emit("chat_message_send", message, callback),
-          receiveMessage: (msg) => this.socket.on('chat_message_update', msg)
+      socketEntrar: (value, callback) =>
+        this.socketHandler.connect(value, callback),
+      retv: value => {
+        this.state.username = value;
+        this.LoadComponentModule(ChatBox, {
+          sendMessage: (message, callback) => this.socketHandler.sendMessage(message, callback),
+          messagesUpdate: (msg) => this.socketHandler.messagesUpdate(msg),
+          messageHistory: (msg) => this.socketHandler.messageHistory(msg)
         });
       }
     });
   }
-
   //@@@Nao funciona
   LazyLoad(ComponentPath) {
     this.setState({
@@ -51,7 +48,6 @@ class App extends React.Component {
 
   render() {
     const { modules } = this.state;
-
     return (
       <div className="App">
         <Suspense fallback={<LoadingMessage />}>
@@ -66,27 +62,6 @@ class App extends React.Component {
             );
           })}
         </Suspense>
-        <button onClick={() => this.LoadComponentModule(Button)}>
-          Cria Button
-        </button>{" "}
-        <button
-          onClick={() =>
-            this.setState({
-              modules: [
-                ...this.state.modules,
-                [
-                  new ComponentModule(
-                    lazy(() => import("./components/Button")),
-                    1,
-                    this.unmountComponent.bind(this, 1)
-                  )
-                ]
-              ]
-            })
-          }
-        >
-          Cria Lazy Button{" "}
-        </button>
       </div>
     );
   }

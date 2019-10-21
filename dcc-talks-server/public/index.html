@@ -57,7 +57,8 @@
 	    	  	$('#messages').append($('<p>').html(msg));
 		    });
 		    	
- 			socket.on('chat_message_history', function(msg){ //recebe historico msgs
+			 socket.on('chat_message_history', function(msg){ //recebe historico msgs
+				console.log(msg.msg);
  				$('#messages').append($('<p>').html(msg.msg));
  			});	
 			

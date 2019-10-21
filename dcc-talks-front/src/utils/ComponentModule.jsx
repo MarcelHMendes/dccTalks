@@ -1,9 +1,9 @@
 export default class ComponentModule {
-  constructor(component, key, unmount) {
+  constructor(component, key, unmount,kargs={}) {
     this.component = component;
     this.key = key;
     this.unmount = unmount;
-    this.kargs={};
+    this.kargs=kargs
     this.callback = () => {};
   }
   setCallback(func){
@@ -12,7 +12,7 @@ export default class ComponentModule {
   setArgs(kargs){
     this.kargs=kargs;
   }
-  static LoadcomponentModule(Component) {
+  static LoadcomponentModule(Component,kargs={}){
     let nkey = this.lastKey++;
     this.setState({
       modules: [
@@ -20,7 +20,8 @@ export default class ComponentModule {
         new ComponentModule(
           Component,
           nkey,
-          this.unmountComponentModule.bind(this, nkey)
+          this.unmountComponentModule.bind(this, nkey),
+          kargs
         )
       ]
     });

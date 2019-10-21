@@ -75,11 +75,9 @@ export default function SignIn(props) {
             fullWidth
             id="email"
             label="Email"
-            //value={values.email}
             name="email"
             autoComplete="email"
             autoFocus
-            //onChange={handleChange('email')}
           />
           <TextField
             variant="outlined"
@@ -91,8 +89,6 @@ export default function SignIn(props) {
             type="password"
             id="password"
             autoComplete="current-password"
-            //value={values.password}
-            //onChange={handleChange('password')}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -104,7 +100,6 @@ export default function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            //onClick={handleSubmit}//{props.unmount}
           >
             Logar
           </Button>
