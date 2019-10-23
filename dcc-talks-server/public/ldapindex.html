@@ -12,7 +12,7 @@
 	<div id="footer"> <h1>DCC Talks</h1> </div>		
 	<div id='acesso_usuario'>
 		<form id='login'>
-			<input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido' />
+			<input type='text' placeholder='Insira seu login' name='apelido' id='apelido' />
 			<input type='password' placeholder='Insira sua senha' name='senha' id='senha' />
 			<input type='submit' value='Entrar' />
 		</form>
@@ -26,7 +26,7 @@
         <input type='text' id='texto_mensagem' name='texto_mensagem' />
         <input type='submit' value='Enviar mensagem!' />    
 		<input type='file' id='imageFile'/> 
-		<button id='sendImage'>Image</button>  
+		<button id='sendImage'>Imagem</button>  
 	</form>
 	</div>
 
@@ -45,21 +45,21 @@
 					$("#sala_chat").show();
 					$("#footer").hide();
 				}
-			});
+			
 
 			});
- 				$('form#chat').submit(function(e){
-	            e.preventDefault();
-	            socket.emit("chat_message_send", $(this).find("#texto_mensagem").val(), function(){
-	                $("form#chat #texto_mensagem").val("");
-	            });
+ 			$('form#chat').submit(function(e){
+	        e.preventDefault();
+	        socket.emit("chat_message_send", $(this).find("#texto_mensagem").val(), function(){
+	            $("form#chat #texto_mensagem").val("");
+	        });
 	        });		
 
  			socket.on('chat_message_update', function(msg){ //recebe msg tempo real
 	    	  	$('#messages').append($('<p>').html(msg));
 		    });
 		    	
-			 socket.on('chat_message_history', function(msg){ //recebe historico msgs
+			socket.on('chat_message_history', function(msg){ //recebe historico msgs
 				console.log(msg.msg);
  				$('#messages').append($('<p>').html(msg.msg));
  			});	
@@ -86,6 +86,8 @@
 				
 				//document.body.appendChild(image);
     			$('#messages').append($('<p>').html(image));
+  			});
+
   			});
 	});
 

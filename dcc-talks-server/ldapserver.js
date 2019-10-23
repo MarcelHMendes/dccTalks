@@ -63,7 +63,7 @@ io.on("connection", socket => {
                 socket.apelido = apelido
                 socket.color = getRandomColor()
                 let message_sent = `[ ${pegarDataAtual()} ] ${apelido.fontcolor(socket.color)} ${'acabou de entrar na sala'.fontcolor(socket.color)}`
-                io.sockets.emit("chat_message_update", message_sent);
+               io.sockets.emit("chat_message_update", message_sent);
                 ultimas_mensagens.forEach(msg => socket.emit("chat_message_history", msg))
                 console.log('login succeded');
                 callback(true);
