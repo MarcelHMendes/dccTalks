@@ -4,7 +4,7 @@ html, body{
      padding: 0;
 }
 body{
-     background:#302F31;
+     background-image: url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX8208889.jpg"); 
      padding:10px;
 }
   
@@ -12,13 +12,13 @@ form{
      margin:15px 0;
 }
 form input[type='text']{
-     border:2px solid #45C5BF;
+     border:2px solid #0B0B3B;/*#45C5BF;*/
      border-radius: 5px;
      padding:5px;
      width:75%;
 }
 form input[type='submit']{
-     background: #45C5BF;
+     background: #0B0B3B;/*#45C5BF;*/
      border:none;
      border-radius: 5px;
      color:#FFF;
@@ -32,8 +32,35 @@ form input[type='file']{
      display: none;
 }
 
+img {
+  max-width:100px;
+  max-height:100px;
+  top:2px;
+  left:3px;
+  padding: 0px;
+}
+
+h1 { 
+     color: #000000 ;/*#CEF0D4;*/ 
+     font-family: 'Rouge Script', cursive; 
+     font-size: 130px; 
+     font-weight: normal; line-height: 48px; 
+     text-align: center; 
+     text-shadow: 1px 1px 2px #082b34; 
+
+}
+
+#footer{
+     width: 1200px;
+     height: 150px;
+     left: 10px;
+     bottom: 15px;
+     position: fixed;
+
+}
+
 #sendImage{
-	 background: #45C5BF;
+	background: #0B0B3B;/*#45C5BF;*/
      border:none;
      border-radius: 5px;
      color:#FFF;
@@ -44,7 +71,7 @@ form input[type='file']{
 
 #messages{
      background: #FFF;
-     border:2px solid #45C5BF;
+     border:2px solid #0B0B3B;/*#45C5BF;*/
      height: 550px;
      overflow: auto;
 

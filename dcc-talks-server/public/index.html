@@ -9,10 +9,7 @@
 
 </head>	
 <body>
-	<h2>Página HTML</h2> 
-			
-	<h3>Arquivo de teste do servidor</h3>
-
+	<div id="footer"> <h1>DCC Talks</h1> </div>		
 	<div id='acesso_usuario'>
 		<form id='login'>
 			<input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido' />
@@ -45,6 +42,7 @@
 				if(valido == true){
 					$("#acesso_usuario").hide();
 					$("#sala_chat").show();
+					$("#footer").hide();
 				}
 			});
 
