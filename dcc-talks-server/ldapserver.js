@@ -32,7 +32,7 @@ var usuarios = []; //Armazena os apelidos de usuários
 /*events*/
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/ldapindex.html');
 })
 
     .use(express.static('public'));
