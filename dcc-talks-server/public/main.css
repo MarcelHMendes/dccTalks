@@ -17,6 +17,12 @@ form input[type='text']{
      padding:5px;
      width:75%;
 }
+form input[type='password']{
+     border:2px solid #0B0B3B;/*#45C5BF;*/
+     border-radius: 5px;
+     padding:5px;
+     width:75%;
+}
 form input[type='submit']{
      background: #0B0B3B;/*#45C5BF;*/
      border:none;

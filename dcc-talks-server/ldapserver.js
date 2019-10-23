@@ -54,6 +54,7 @@ io.on("connection", function(socket){
 
         function login(isAuthenticated){
             if(isAuthenticated) {
+                console.log('login succesfully');
                 socket.apelido = apelido;
                 socket.color = getRandomColor();
                 usuarios[apelido] = socket;
