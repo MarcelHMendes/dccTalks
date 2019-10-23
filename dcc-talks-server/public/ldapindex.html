@@ -1,102 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Chat dccTalks</title>	
-	<link rel="stylesheet" type="text/css" href="/main.css">
-	<script src="/socket.io/socket.io.js"></script>
-	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <title>Chat dccTalks</title>	
+        <link rel="stylesheet" type="text/css" href="/main.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 
-</head>	
-<body>
-	<div id="footer"> <h1>DCC Talks</h1> </div>		
-	<div id='acesso_usuario'>
-		<form id='login'>
-			<input type='text' placeholder='Insira seu login' name='apelido' id='apelido' />
-			<input type='password' placeholder='Insira sua senha' name='senha' id='senha' />
-			<input type='submit' value='Entrar' />
-		</form>
-	</div>
-		
-	<div id="sala_chat">
-	<div id="messages">
-		<img id="figure" />  <!-- nao utilizado -->
-	</div>		
-	<form id="chat">
-        <input type='text' id='texto_mensagem' name='texto_mensagem' />
-        <input type='submit' value='Enviar mensagem!' />    
-		<input type='file' id='imageFile'/> 
-		<button id='sendImage'>Imagem</button>  
-	</form>
-	</div>
+    </head>	
+    <body>
+        <div id="footer"> <h1>DCC Talks</h1> </div>		
+        <div id='acesso_usuario'>
+            <form id='login'>
+                <input type='text' placeholder='Insira seu login' name='apelido' id='apelido' />
+                <input type='password' placeholder='Insira sua senha' name='senha' id='senha' />
+                <input type='submit' value='Entrar' />
+            </form>
+        </div>
 
-	<script>
-		$(document).ready(function(){
-  			var socket = io();
-  				
-  			$("form#login").submit(function(e){
-				e.preventDefault();
-				
-			
-			// Evento enviado quando o usuário insere um apelido
-			socket.emit("entrar", $(this).find("#apelido").val(), $(this).find("#senha").val(), function(valido){
-				if(valido == true){
-					$("#acesso_usuario").hide();
-					$("#sala_chat").show();
-					$("#footer").hide();
-				}
-			
+        <div id="sala_chat">
+            <div id="messages">
+                <img id="figure" />  <!-- nao utilizado -->
+            </div>		
+            <form id="chat">
+                <input type='text' id='texto_mensagem' name='texto_mensagem' />
+                <input type='submit' value='Enviar mensagem!' />    
+            </form>
+        </div>
 
-			});
- 			$('form#chat').submit(function(e){
-	        e.preventDefault();
-	        socket.emit("chat_message_send", $(this).find("#texto_mensagem").val(), function(){
-	            $("form#chat #texto_mensagem").val("");
-	        });
-	        });		
+        <script>
+            $(document).ready(function(){
+                var socket = io();
 
- 			socket.on('chat_message_update', function(msg){ //recebe msg tempo real
-	    	  	$('#messages').append($('<p>').html(msg));
-		    });
-		    	
-			socket.on('chat_message_history', function(msg){ //recebe historico msgs
-				console.log(msg.msg);
- 				$('#messages').append($('<p>').html(msg.msg));
- 			});	
-			
-			$( '#sendImage' ).click( function(e) {   //Função quee associa botão Image ao input file (Para não manter o botão browse)
-    			e.preventDefault(); // prevents submitting
-    			$('input').trigger('click');
-			});
-
-			$('#imageFile').on('change', function(e) {	//Envia imagem para o servidor após o evento
-   				var file = e.originalEvent.target.files[0],
-     			reader = new FileReader();
-
-   				reader.onload = function(evt) {
-     				socket.emit('image', evt.target.result);
-   				};
-
-  				reader.readAsDataURL(file);
- 			});
-
-			socket.on('imageTo', function(data) {	//Recebe imagem em base64 e cria uma instancia visualizavel
-				var image = new Image(300,150);
-				image.src = data;
-				
-				//document.body.appendChild(image);
-    			$('#messages').append($('<p>').html(image));
-  			});
-
-  			});
-	});
-
-	
-	</script>
+                $("form#login").submit(function(e){
+                    e.preventDefault();
 
 
-			
-</body>
+                    // Evento enviado quando o usuário insere um apelido
+                    socket.emit("entrar", $(this).find("#apelido").val(), $(this).find("#senha").val(), function(valido){
+                        if(valido == true){
+                            $("#acesso_usuario").hide();
+                            $("#sala_chat").show();
+                            $("#footer").hide();
+                        }
+
+                    });
+                    $('form#chat').submit(function(e){
+                        e.preventDefault();
+                        socket.emit("chat_message_send", $(this).find("#texto_mensagem").val(), function(){
+                            $("form#chat #texto_mensagem").val("");
+                        });
+                    });		
+                    socket.on('chat_message_update', function(msg){ //recebe msg tempo real
+                        $('#messages').append($('<p>').html(msg));
+                    });
+
+                    socket.on('chat_message_history', function(msg){ //recebe historico msgs
+                        console.log(msg.msg);
+                        $('#messages').append($('<p>').html(msg.msg));
+                    });	
+
+                    $( '#sendImage' ).click( function(e) {   //Função quee associa botão Image ao input file (Para não manter o botão browse)
+                        e.preventDefault(); // prevents submitting
+                        $('input').trigger('click');
+                    });
+                    $('#imageFile').on('change', function(e) {	//Envia imagem para o servidor após o evento
+                        var file = e.originalEvent.target.files[0],
+                            reader = new FileReader();
+                        reader.onload = function(evt) {
+                            socket.emit('image', evt.target.result);
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                    socket.on('imageTo', function(data) {	//Recebe imagem em base64 e cria uma instancia visualizavel
+                        var image = new Image(300,150);
+                        image.src = data;
+
+                        //document.body.appendChild(image);
+                        $('#messages').append($('<p>').html(image));
+                    });
+                });
+            });
+        </script>
+    </body>
 </html>
-
-		
