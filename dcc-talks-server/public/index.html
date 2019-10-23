@@ -13,6 +13,7 @@
 	<div id='acesso_usuario'>
 		<form id='login'>
 			<input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido' />
+			<input type='password' placeholder='Insira sua senha' name='senha' id='senha' />
 			<input type='submit' value='Entrar' />
 		</form>
 	</div>
@@ -38,7 +39,7 @@
 				
 			
 			// Evento enviado quando o usuário insere um apelido
-			socket.emit("entrar", $(this).find("#apelido").val(), function(valido){
+			socket.emit("entrar", $(this).find("#apelido").val(), $(this).find("#senha").val(), function(valido){
 				if(valido == true){
 					$("#acesso_usuario").hide();
 					$("#sala_chat").show();
