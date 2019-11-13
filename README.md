@@ -61,3 +61,6 @@ O objetivo do grupo é construir um chat para membros do DCC. A aplicação ter�
 
 <h3>Planilha de horas trabalhadas e gráfico Burndown:</h3>
 https://docs.google.com/spreadsheets/d/1LkTBOFhggMkR51647JvbGOqAns9imvd4gFM-OkqZy5I/edit?usp=sharing</br>
+
+<h3>Planilha dos testes</h3>
+https://docs.google.com/spreadsheets/d/1HSIr33ZEmA5TKUEp6WfY8c_kuWeM_slzHVWUQTMmbzQ/edit?usp=sharing</br>
