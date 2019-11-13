@@ -44,7 +44,7 @@ describe('#socket_events(server)', function (){
             done();
         });
     });
-    describe('Verifica se o servidor consegue fechar e subir de novo', function (){
+    describe('Testes com clientes', function (){
         it('Verifica se consegue aceitar clientes', function (done){
             let client = io_client(end_point, opts);
             client.disconnect();
